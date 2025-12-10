@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gerador de Ficha Catalográfica</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Gerador de Ficha Catalográfica">
+        <meta name="keywords" content="gerador, ficha, catalográfica">
+        <meta name="author" content="Leonardo José Rossoni Quadros">
+        <link rel="stylesheet" href="config.css">
+        <script src="pdfgenerator.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function test(){
+            x = new Date().getFullYear();
+            document.getElementById("ano_defesa").value =x;
+        }
+
+        </script>
+    </head>
+    <body onload="test()">
+        <form id="meuForm">
+            <div id="menu">
+                <ul><a href="https://biblioteca.ifpr.edu.br/" target="blank">Pergamum</a></ul>
+            </div>
+            <br><br>
+
+
+            <div id="dados_pessoais">
+                <fieldset>
+                    <legend id="legenda">
+                        Dados pessoais
+                    </legend>
+                    <label for="nomes">
+                        <details open>
+                            <summary> Nome e sobrenome:</summary>
+                            <p>Autor único: Nome, Sobrenome<br>
+                            Vários autores: Nome, Sobrenome (separando cada autor com uma nova linha)</p>
+                        </details>
+                        <textarea name="nomes" id="nomes" cols="180" rows="15" required="required"></textarea>
+                    	</br>
+                    	</br>
+                    	Código Cutter:
+                        <input type="text" name="c_cutter" id="c_cutter" size="30" maxlength="20" required="required">
+                        <a href="http://cutternumber.com/" target="_blank">
+                        	<input type="button" value="Gere seu Código Cutter">
+    					</a>
+                        <p>Indique o <strong>sobrenome</strong> do autor da obra, gere o código e cole no campo acima.</p>
+                        <p>Exemplo: o autor "Lucas Silva Mateus" irá indicar apenas o último nome "Mateus".
+                    </label>
+                </fieldset>
+
+
+            </nav>
+            <div id="dados-trabalho">
+                <fieldset>
+                    <legend id="legenda">Dados do trabalho</legend>
+                    <label for="titulo_t">
+                        Título do Trabalho (na existência de subtítulo não inserir dois pontos):
+                        <input type="text" name="titulo_t" id="titulo_t" size="30" maxlength="400" required="required">
+                    </label>
+                    <hr />
+                    <label for="subt">
+                        Subtítulo do Trabalho:
+                        <input type="text" name="subt" id="subt" size="30" maxlength="400">
+                    </label>
+                    <hr />
+                        Trabalho:
+                        <br />
+                        <input type="radio" name="trabalho" id="Trabalho de Conclusão de Curso (Graduação)" checked="checked" value="Trabalho de Conclusão de Curso (Graduação">
+                        <label for="Trabalho de Conclusão de Curso (Graduação)">TCC (Graduação)</label><br />
+                        <input type="radio" name="trabalho" id="Monografia (Especialização)" value="Monografia (Especialização">
+                        <label for="Monografia (Especialização)">Monografia (Especialização)</label><br />
+                        <input type="radio" name="trabalho" id="Dissertação (Mestrado)" value="Dissertação (Mestrado">
+                        <label for="Dissertação (Mestrado)">Dissertação (Mestrado)</label><br />
+                        <input type="radio" name="trabalho" id="Tese (Doutorado)" value="Tese (Doutorado">
+                        <label for="Tese (Doutorado)">Tese (Doutorado)</label><br />
+                        <input type="radio" name="trabalho" id="Tese (Pós-doutorado)" value="Tese (Pós-doutorado">
+                        <label for="Tese (Pós-doutorado)">Tese (Pós-doutorado)</label>
+                    <hr />
+                    <label for="projeto">
+                        <details open>
+                            <summary>Programa:</summary>
+                            <p>Exemplo TCC e Monografia: Bacharelado em Agronomia, Tecnólogo em Análise e Desenvolvimento de Sistemas <br>
+                            Exemplo Mestrado/Doutorado/Pós-Doutorado: Programa de Doutorado em Ciência da Informação</p>
+                        </details>
+                        <input type="text" name="projeto" id="projeto" size="30" maxlength="80" placeholder="Mestrado em Agronomia">
+                    </label>
+                    <hr />
+                    <label for="n_orientador">
+                        Orientador (nome e sobrenome):
+                        <input type="text" name="n_orientador" placeholder="Nome" id="n_orientador" size="30" maxlength="60"  required="required">
+                        <input type="text" name="s_orientador" placeholder="Sobrenome" id="s_orientador" size="30" maxlength="60" required="required">
+                    </label>
+                    <hr />
+                    <label for="coorientador">
+                        Coorientador (nome e sobrenome):
+                    <input type="text" name="ncoorientador" placeholder="Nome" id="ncoorientador" size="30" maxlength="60">
+                    <input type="text" name="scoorientador" placeholder="Sobrenome" id="scoorientador" size="30" maxlength="60">
+                    </label>
+                    <hr />
+                    <label for="campus">
+                        IFPR - Campus:
+                        <select name="campus" id="campus">
+                            <option value="Avançado Arapongas">Avançado Arapongas</option>
+                            <option value="Assis Chateaubriand">Assis Chateaubriand</option>
+                            <option value="Avançado Astorga">Avançado Astorga</option>
+                            <option value="Avançado Barracão">Avançado Barracão</option>
+                            <option value="Campo Largo">Campo Largo</option>
+                            <option value="Capanema">Capanema</option>
+                            <option value="Cascavel">Cascavel</option>
+                            <option value="Colombo">Colombo</option>
+                            <option value="Avançado Coronel Vivida">Avançado Coronel Vivida</option>
+                            <option value="Curitiba">Curitiba</option>
+                            <option value="Foz do Iguaçu">Foz do Iguaçu</option>
+                            <option value="Avançado Goioerê">Avançado Goioerê</option>
+                            <option value="Jacarezinho">Jacarezinho</option>
+                            <option value="Jaguariaíva">Jaguariaíva</option>
+                            <option value="Irati">Irati</option>
+                            <option value="Ivaiporã">Ivaiporã</option>
+                            <option value="Londrina">Londrina</option>
+                            <option value="Palmas">Palmas</option>
+                            <option value="Paranaguá">Paranaguá</option>
+                            <option value="Paranavaí">Paranavaí</option>
+                            <option value="Pinhais">Pinhais</option>
+                            <option value="Pitanga">Pitanga</option>
+                            <option value="Avançado Ponta Grossa">Avançado Ponta Grossa</option>
+                            <option value="Avançado Quedas do Iguaçu">Avançado Quedas do Iguaçu</option>
+                            <option value="Telêmaco Borba">Telêmaco Borba</option>
+                            <option value="Toledo">Toledo</option>
+                            <option value="Umuarama">Umuarama</option>
+                            <option value="União da Vitória" selected>União da Vitória</option>
+                        </select>
+                    </label>
+                    <hr />
+                    <label for="ano_defesa">
+                        Ano de defesa:
+                        <input type="number" name="ano_defesa" id="ano_defesa" size="4" maxlength="4" required="required">
+                    </label>
+                    <hr />
+                    <label for="n_folhas">
+                        Número de Páginas:
+                        <input type="number" name="n_folhas" id="n_folhas" size="4" maxlength="4" required="required">
+                    </label>
+                </fieldset>
+            </div>
+            <div id="fim-de-pagina">
+                <fieldset>
+                    <legend id="legenda">Assuntos (mín. 3, máx. 5)</legend>
+                    <label for="assunto1">
+                        1.:
+                        <input type="text" name="assunto1" id="assunto1" size="30" maxlength="200" required="required">
+                    </label>
+                    <hr />
+                    <label for="assunto2">
+                        2.:
+                        <input type="text" name="assunto2" id="assunto2" size="30" maxlength="200" required="required">
+                    </label>
+                    <hr />
+                    <label for="assunto3">
+                        3.:
+                        <input type="text" name="assunto3" id="assunto3" size="30" maxlength="200" required="required">
+                    </label>
+                    <hr />
+                    <label for="assunto4">
+                        4.:
+                        <input type="text" name="assunto4" id="assunto4" size="30" maxlength="200">
+                    </label>
+                    <hr />
+                    <label for="assunto5">
+                        5.:
+                        <input type="text" name="assunto5" id="assunto5" size="30" maxlength="200">
+                    </label>
+                </fieldset>
+            </div>
+            <button onclick="checar()">Gerar arquivo</button>
+        </form>
+        <div id="rodape">
+            <footer>
+                Responsável pela estrutura de catalogação da publicação de acordo com a AACR2: <br>
+                Daiana Ellen Canato - CRB 9/1930 <br>
+                Desenvolvedores: <br>
+                Jefferson Nogueira de Oliveira <br>
+                Leonardo J. Rossoni Quadros <br>
+                Wellison Vieira Custer <br>
+            </footer>
+        </div>
+    </body>
+</html>
